@@ -1,0 +1,48 @@
+//dd(); ve a variavel
+
+//Cria um novo registro no banco de dados
+        $user = new User();
+        $user->name = "Leo Dias";
+        $user->email = "leodias@gmail.com";
+        $user->password = "123123";
+        $user->save();
+
+//Muda o endereco de algum id especifico
+        $user = User::find(2);
+        $user->password = "coringao";
+        $user->save();
+
+//Apaga do registro
+        $user = User::find(2);
+        $user->delete();
+
+//Carrega todos os registros (se o soft deletes estiver ativo, lista apenas os que nao tem valor deleteded_at)
+        $users = User::where('password', '123123')->get();
+ou
+        $users = User::where('password', '!=','123123')->get();
+
+//Mais de 1 filtro
+        $users = User::where('password', '123123')->whereNotNull('email_verified_at')->get();
+
+// Cria registros
+        for($i=1;$i<16;$i++){
+            $user = new User();
+            $user->name = "Teste".$i;
+            $user->email = "Teste".$i."@gmail.com";
+            $user->password = rand(100000, 999999);
+            $user->save();
+        }
+
+//Usar o Storage e agrupar pra imprimir mais facil
+        $data = json_decode(file_get_contents(storage_path('/app/public/customer_data.json')));
+
+        $total = collect($data->payment_history)->sum('value');
+
+        $groupedByYears = collect($data->payment_history)->groupBy('year');
+
+        echo 'Total: R$ ' . $total . '<br>';
+
+        foreach($groupedByYears as $key => $year){
+            $yearCollection = collect($year);
+            echo 'Total '. $key . ': R$ ' . $yearCollection->sum('value') . '<br>';
+        }
