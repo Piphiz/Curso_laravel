@@ -9,6 +9,9 @@
             <a href="{{ route('product.create') }}" class="btn btn-dark btn-unidev">Cadastrar novo</a>
         </div>
     </div>
+
+    @include('layout.messages')
+
     <div class="table-responsive">
         <table class="table table-dark table-striped mt-5">
             <thead>
@@ -33,7 +36,7 @@
                 <td scope="col">{{ $product->manufacturing_date->format('d/m/Y') }}</td>
                 <td scope="col">
                     <a class= "btn btn-dark btn-sm btn-unidev" href="{{ route('product.edit', $product->id) }}">Editar</a>
-                    {{-- <a class= "btn btn-dark btn-sm btn-unidev" href="{{ route('') }}">Excluir</a> --}}
+                    <a class= "btn btn-dark btn-sm btn-unidev" onclick="deleteInDatabase('{{ route('product.destroy', $product->id)}}')">Excluir</a>
                 </td>
             </tr>
             @endforeach

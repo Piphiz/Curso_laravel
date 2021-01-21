@@ -16,6 +16,7 @@
         @method('put')
 
         @include('products.partials.form')
+
         <div class="row">
             <div class="col-md">
                 <hr>
