@@ -29,7 +29,7 @@ class Product extends Model
             $products = $products->where('price','>=', $request->get('price_from') ?? 0);
 
         if(!empty($request->get('price_to')))
-            $products = $products->where('price','<=', $request->get('price_to')?? 0);
+            $products = $products->where('price','<=', $request->get('price_to') ?? 0);
 
         switch($request->get('order_by')){
             case 'newest':

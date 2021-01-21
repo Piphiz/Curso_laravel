@@ -9,7 +9,6 @@
         <th scope="col">Nome</th>
         <th scope="col">Email</th>
         <th scope="col">Data ver/ do email</th>
-        <th scope="col">Token</th>
         <th scope="col">Data de criacao</th>
         <th scope="col">Data de update</th>
         <th scope="col"></th>
@@ -23,7 +22,6 @@
         <td scope="col">{{ $user->email }}</td>
         <td scope="col">@if($user->email_verified_at == null){{'Nao Verificado'}}
                         @else{{$user->email_verified_at->format('d/m/Y - H:i:s') }}@endif</td>
-        <td scope="col">{{ $user->remember_token }}</td>
         <td scope="col">{{ $user->created_at->format('d/m/Y') }}</td>
         <td scope="col">{{ $user->updated_at->format('d/m/Y') }}</td>
         <td scope="col"></td>

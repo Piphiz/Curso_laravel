@@ -12,35 +12,33 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name', 'email', 'email_verified_at', 'created_at', 'updated_at'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = [ 'password', 'remember_token'];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function filterAll($request)
+    {
+        $users = User::where('name', 'like', '%' . $request->get('keyword') . '%');
+
+        if(!empty($request->get('email')))
+            $users = User::where('email', 'like', '%' . $request->get('email') . '%');
+
+        switch($request->get('order_by')){
+            case 'newest':
+                $users = $users->orderBy('created_at', 'desc');
+                break;
+            case 'older':
+                $users = $users->orderBy('created_at', 'asc');
+                break;
+        }
+
+        return $users->paginate(10);
+    }
+
 }
