@@ -31,8 +31,8 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary">Filtrar</button>
-                        <a class="btn btn-warning" href="{{ route('product.index') }}">Limpar</a>
+                        <button type="submit" class="btn btn-dark btn-unidev">Filtrar</button>
+                        <a class="btn btn-dark btn-unidev" href="{{ route('product.index') }}">Limpar</a>
                     </div>
                 </form>
 

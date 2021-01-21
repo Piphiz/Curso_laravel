@@ -38,7 +38,7 @@ class ProductController extends Controller
 
             $request->session()->flash('success', 'Registro Gravado com sucesso!');
         }catch(Exception $e){
-            $request->session()->flash('error', '$e->getMessage()');
+            $request->session()->flash('error', 'Ocorreu um erro ao tentar gravas esses dados!');
         }
 
         return redirect()->back();
@@ -50,14 +50,23 @@ class ProductController extends Controller
     }
 
 
-    public function edit(Product $product)
+    public function edit(Request $request, Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        try{
+            $data = $request->all();
+            $product->update($data);
+
+            $request->session()->flash('success', 'Registro atualizado com sucesso!');
+        }catch(\Exception $e){
+            $request->session()->flash('error', 'Ocorreu um erro ao tentar atualizar esses dados!');
+        }
+
+        return redirect()->back();
     }
 
     public function destroy(Product $product)

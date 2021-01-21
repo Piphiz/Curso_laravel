@@ -19,7 +19,7 @@
                 <th scope="col">Fabricante</th>
                 <th scope="col">Validade</th>
                 <th scope="col">Fabricação</th>
-                <th scope="col"></th>
+                <th scope="col" width="150"></th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +31,10 @@
                 <td scope="col">{{ $product->provider }}</td>
                 <td scope="col">{{ $product->expiration_date->format('d/m/Y') }}</td>
                 <td scope="col">{{ $product->manufacturing_date->format('d/m/Y') }}</td>
-                <td scope="col"></td>
+                <td scope="col">
+                    <a class= "btn btn-dark btn-sm btn-unidev" href="{{ route('product.edit', $product->id) }}">Editar</a>
+                    {{-- <a class= "btn btn-dark btn-sm btn-unidev" href="{{ route('') }}">Excluir</a> --}}
+                </td>
             </tr>
             @endforeach
             </tbody>
