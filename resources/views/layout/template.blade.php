@@ -21,15 +21,27 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Nav</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
+                <div class="navbar-nav me-auto">
                     <a class="nav-link {{(request()->segment(1) === 'product') ? 'active' : '' }}" href="{{ route('product.index') }}">Produtos</a>
                     <a class="nav-link {{(request()->segment(1) === 'user') ? 'active' : '' }}" href="/user">Usuarios</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <a class="nav-link"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                    </form>
                 </div>
+                <span class="nav-text text-light" >
+                    Bem-vindo: {{  auth()->user()->name }}
+                </span>
             </div>
         </div>
     </nav>

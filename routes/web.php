@@ -19,6 +19,13 @@ Route::get('/', function () {
     return redirect()->route('product.index');
 });
 
-Route::resource('user',UserController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::resource('product', ProductController::class);
+require __DIR__.'/auth.php';
+
+Route::middleware(['auth'])->group(function(){
+    Route::resource('user', UserController::class);
+    Route::resource('product', ProductController::class);
+});
