@@ -23,6 +23,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::any('/register', function() {
+    return redirect()->route('product.index');
+});
+
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function(){
