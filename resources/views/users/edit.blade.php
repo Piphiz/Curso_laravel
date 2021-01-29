@@ -22,7 +22,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Senha Atual:</span>
             </div>
-            <input type="password" class="form-control" id="actualPassword" minlength="8" name="actualPassword" placeholder="Para trocar de senha digite a senha atual">
+            <input type="password" class="form-control" id="actualPassword" minlength="6" name="actualPassword" placeholder="Para trocar de senha digite a senha atual">
         </div>
 
         <div class="row">
