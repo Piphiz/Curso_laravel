@@ -2,41 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
-use App\Models\Product;
+use App\Http\Requests\ProviderRequest;
 use App\Models\Provider;
-use Exception;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProviderController extends Controller
 {
-
     public function index(Request $request)
     {
-        $product = new Product();
+        $provider = new Provider();
 
         if($request->has('action') && $request->get('action') === 'search') {
-            $products = $product->filterAll($request);
+            $providers = $provider->filterAll($request);
         } else {
-            $products = $product->orderBy('created_at', 'desc')->paginate(10);
+            $providers = $provider->orderBy('created_at', 'desc')->paginate(10);
         }
 
-        return view('products.index', compact('products'));
+        return view('providers.index', compact('providers'));
     }
 
     public function create()
     {
-        $providers = Provider::all();
-        return view('products.create', compact('providers'));
+        return view('providers.create');
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProviderRequest $request)
     {
         try{
             $data = $request->all();
 
-            $product = new Product();
-            $product->create($data);
+            $provider = new Provider();
+            $provider->create($data);
 
             $request->session()->flash('success', 'Registro Gravado com sucesso!');
         }catch(\Exception $e){
@@ -46,22 +42,21 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function show(Product $product)
+    public function show(Provider $provider)
     {
         //
     }
 
-    public function edit(Request $request, Product $product)
+    public function edit(Request $request, Provider $provider)
     {
-        $providers = Provider::all();
-        return view('products.edit', compact('product', 'providers'));
+        return view('providers.edit', compact('provider'));
     }
 
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProviderRequest $request, Provider $provider)
     {
         try{
             $data = $request->all();
-            $product->update($data);
+            $provider->update($data);
 
             $request->session()->flash('success', 'Registro atualizado com sucesso!');
         }catch(\Exception $e){
@@ -71,10 +66,10 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Request $request, Product $product)
+    public function destroy(Request $request, Provider $provider)
     {
         try{
-            $product->delete();
+            $provider->delete();
 
             $request->session()->flash('success', 'Registro excluido com sucesso!');
         }catch(\Exception $e){

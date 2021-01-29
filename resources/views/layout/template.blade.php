@@ -7,7 +7,6 @@
     <title>Unidev Produtos</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
     <style>
 
         .btn-unidev:hover{
@@ -28,11 +27,12 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav me-auto">
                     <a class="nav-link {{(request()->segment(1) === 'product') ? 'active' : '' }}" href="{{ route('product.index') }}">Produtos</a>
+                    <a class="nav-link {{(request()->segment(1) === 'provider') ? 'active' : '' }}" href="/provider">Fornecedores</a>
                     <a class="nav-link {{(request()->segment(1) === 'user') ? 'active' : '' }}" href="/user">Usuarios</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <a class="nav-link"
+                        <a class="nav-link" type="button"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             {{ __('Logout') }}
@@ -73,11 +73,7 @@
         if(order_by)
             order_by.value = "{{ request()->get('order_by') }}";
 
-        const provider = document.querySelector('#provider');
-
-        if(provider)
-            provider.value = "{{ $product->provider ?? ''}}";
-
+        //Funcao para delter um dado
         function deleteInDatabase(path){
             if(confirm('Voce tem certeza que deseja excluir esse registro?')){
                 const deleteForm = document.querySelector('#delete_form');
@@ -86,8 +82,20 @@
                 deleteForm.submit();
             }
         }
+        //Comparacao de Password com Confirm_password
+        var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
 
-      </script>
+        function validatePassword(){
+            if(password.value != confirm_password.value){
+                confirm_password.setCustomValidity("Senhas não coincidem!");
+            }else{
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+
+    </script>
 
 </body>
 </html>

@@ -19,7 +19,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nome do produto</th>
                 <th scope="col">Preço</th>
-                <th scope="col">Fabricante</th>
+                <th scope="col">Fornecedor</th>
                 <th scope="col">Validade</th>
                 <th scope="col">Fabricação</th>
                 <th scope="col" width="150"></th>
@@ -31,12 +31,12 @@
                 <td scope="col">{{ $product->id }}</td>
                 <td scope="col">{{ $product->name }}</td>
                 <td scope="col">{{ $product->price_formated }}</td>
-                <td scope="col">{{ $product->provider }}</td>
+                <td scope="col">{{ $product->provider->name ?? '---' }}</td>
                 <td scope="col">{{ $product->expiration_date->format('d/m/Y') }}</td>
                 <td scope="col">{{ $product->manufacturing_date->format('d/m/Y') }}</td>
                 <td scope="col">
                     <a class= "btn btn-dark btn-sm btn-unidev" href="{{ route('product.edit', $product->id) }}">Editar</a>
-                    <a class= "btn btn-dark btn-sm btn-unidev" onclick="deleteInDatabase('{{ route('product.destroy', $product->id)}}')">Excluir</a>
+                    <a class= "btn btn-danger btn-sm" onclick="deleteInDatabase('{{ route('product.destroy', $product->id)}}')">Excluir</a>
                 </td>
             </tr>
             @endforeach

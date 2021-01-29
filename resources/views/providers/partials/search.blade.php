@@ -11,28 +11,27 @@
                     <input type="hidden" name="action" value="search">
 
                 <form class="row">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Nome do produto" value="{{ request()->get('keyword') }}">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Nome do usuario" value="{{ request()->get('keyword') }}">
                     </div>
-                    <div class="col-md-5">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <input type="text" class="form-control" id="price_from" name="price_from" placeholder="Preço de" value="{{ request()->get('price_from') }}">
-                            <div class="mx-2">Até</div>
-                            <input type="text" class="form-control" id="price_to" name="price_to" placeholder="Preço até" value="{{ request()->get('price_to') }}">
-                        </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="{{ request()->get('email') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone" value="{{ request()->get('phone') }}">
                     </div>
                     <div class="col-md-3">
                         <select class="form-select" id="order_by" name="order_by">
                             <option value="">Ordernar por...</option>
                             <option value="newest">Mais recentes</option>
                             <option value="older">Mais antigos</option>
-                            <option value="price_desc">Maior preço</option>
-                            <option value="price_asc">Menor preço</option>
+                            <option value="activated">Ativadas</option>
+                            <option value="deactivated">Desativadas</option>
                         </select>
                     </div>
                     <div class="col-md-12 mt-2 text-center">
                         <button type="submit" class="btn btn-dark btn-unidev">Filtrar</button>
-                        <a class="btn btn-dark btn-unidev" href="{{ route('product.index') }}">Limpar</a>
+                        <a class="btn btn-dark btn-unidev" href="{{ route('provider.index') }}">Limpar</a>
                     </div>
                 </form>
 
